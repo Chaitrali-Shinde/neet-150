@@ -1,5 +1,5 @@
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+class Solution(object):
+    def twoSum(self, nums, target):
         d = {}
         for i, j in enumerate(nums):
             r = target - j
