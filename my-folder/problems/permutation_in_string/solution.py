@@ -20,7 +20,7 @@ class Solution:
             s2Count[index]+=1
             if s1Count[index]== s2Count[index]:
                 matches+=1
-            elif s1Count[index]+1== s2Count[index]:
+            elif s1Count[index]+1== s2Count[index]:   #if we have incremented the count of that character by one, initially it was matching but now it's more than 1 so we'll decrement the matches count
                 matches-=1
 
             #for removing a character from left
