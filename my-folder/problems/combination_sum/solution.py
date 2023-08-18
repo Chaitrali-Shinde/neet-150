@@ -1,21 +1,22 @@
 class Solution:
-
-    def subsets(self,index, tempSub, n, temp, result, target):
-        if(index==n):
-            if(target==0):
-                result.append(tempSub[:])
-            return 
-        if(temp[index]<=target):
-            tempSub.append(temp[index])
-            self.subsets(index, tempSub, n, temp, result, target-temp[index])
-            tempSub.pop()
-        self.subsets(index+1, tempSub, n, temp, result, target)
-
-
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res= []
 
-        result=[]
-        n= len(candidates)
-        i=0
-        self.subsets(i, [], n, candidates, result, target)
-        return result
+        def dfs(i, curr, total):
+            if total== target:
+                res.append(curr.copy())
+                return
+            if i>=len(candidates) or total>target:
+                return
+            
+            #left side of the recursion tree: add the candidate
+            curr.append(candidates[i])
+            dfs(i, curr, total+candidates[i])
+            #right side of the recursion tree: do not add the candidate
+            curr.pop()
+            dfs(i+1, curr, total)
+
+        
+
+        dfs(0, [], 0)
+        return res
