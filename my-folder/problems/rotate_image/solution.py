@@ -3,14 +3,15 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        #take transpose of the given matrix
-        for i in range(0, len(matrix)):
-            for j in range(i, len(matrix[i])):
-                matrix[i][j], matrix[j][i]= matrix[j][i], matrix[i][j]
-        
-        
-        n= len(matrix)-1
-        for i in range(0, len(matrix)):
-            l=matrix[i]
-            l= l[::-1]
-            matrix[i]=l               
+        l, r= 0 , len(matrix)-1
+        while l<r:
+            for i in range(r-l):
+                top, bottom=l, r
+                topLeft= matrix[top][i+l]
+                matrix[top][l+i]= matrix[bottom-i][l]
+                matrix[bottom-i][l]= matrix[bottom][r-i]
+                matrix[bottom][r-i]= matrix[top+i][r]
+                matrix[top+i][r]= topLeft
+            r-=1
+            l+=1
+
